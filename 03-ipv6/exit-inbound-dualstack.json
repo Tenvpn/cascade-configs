@@ -1,0 +1,39 @@
+{
+  "tag": "from-bridge",
+  "listen": "::",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [
+      {
+        "id": "<UUID_BRIDGE>",
+        "flow": "xtls-rprx-vision",
+        "email": "bridge-1"
+      }
+    ],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "tcp",
+    "security": "reality",
+    "realitySettings": {
+      "target": "127.0.0.1:8443",
+      "serverNames": [
+        "exit.<YOUR_DOMAIN>"
+      ],
+      "privateKey": "<EXIT_REALITY_PRIVATE_KEY>",
+      "shortIds": [
+        "<SHORT_ID>"
+      ]
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ],
+    "routeOnly": true
+  }
+}

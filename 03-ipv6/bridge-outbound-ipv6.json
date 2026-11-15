@@ -1,0 +1,29 @@
+{
+  "tag": "to-exit-v6",
+  "protocol": "vless",
+  "settings": {
+    "vnext": [
+      {
+        "address": "<EXIT_IPV6>",
+        "port": 443,
+        "users": [
+          {
+            "id": "<UUID_BRIDGE>",
+            "flow": "xtls-rprx-vision",
+            "encryption": "none"
+          }
+        ]
+      }
+    ]
+  },
+  "streamSettings": {
+    "network": "tcp",
+    "security": "reality",
+    "realitySettings": {
+      "serverName": "exit.<YOUR_DOMAIN>",
+      "fingerprint": "firefox",
+      "publicKey": "<EXIT_REALITY_PUBLIC_KEY>",
+      "shortId": "<SHORT_ID>"
+    }
+  }
+}

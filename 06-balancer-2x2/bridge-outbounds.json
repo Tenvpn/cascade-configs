@@ -1,0 +1,60 @@
+[
+  {
+    "tag": "to-exit-1",
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "<EXIT_1_IP>",
+          "port": 443,
+          "users": [
+            {
+              "id": "<UUID_BRIDGE>",
+              "flow": "xtls-rprx-vision",
+              "encryption": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "network": "tcp",
+      "security": "reality",
+      "realitySettings": {
+        "serverName": "exit1.<YOUR_DOMAIN>",
+        "fingerprint": "firefox",
+        "publicKey": "<EXIT_1_REALITY_PUBLIC_KEY>",
+        "shortId": "<SHORT_ID>"
+      }
+    }
+  },
+  {
+    "tag": "to-exit-2",
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "<EXIT_2_IP>",
+          "port": 443,
+          "users": [
+            {
+              "id": "<UUID_BRIDGE>",
+              "flow": "xtls-rprx-vision",
+              "encryption": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "network": "tcp",
+      "security": "reality",
+      "realitySettings": {
+        "serverName": "exit2.<YOUR_DOMAIN>",
+        "fingerprint": "firefox",
+        "publicKey": "<EXIT_2_REALITY_PUBLIC_KEY>",
+        "shortId": "<SHORT_ID>"
+      }
+    }
+  }
+]

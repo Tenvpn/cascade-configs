@@ -1,0 +1,33 @@
+{
+  "domainStrategy": "IPIfNonMatch",
+  "rules": [
+    {
+      "type": "field",
+      "ip": [
+        "geoip:private"
+      ],
+      "outboundTag": "blocked"
+    },
+    {
+      "type": "field",
+      "domain": [
+        "geosite:category-ru"
+      ],
+      "outboundTag": "direct"
+    },
+    {
+      "type": "field",
+      "ip": [
+        "geoip:ru"
+      ],
+      "outboundTag": "direct"
+    },
+    {
+      "type": "field",
+      "inboundTag": [
+        "from-phones"
+      ],
+      "outboundTag": "to-exit"
+    }
+  ]
+}

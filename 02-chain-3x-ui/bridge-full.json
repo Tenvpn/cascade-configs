@@ -1,0 +1,118 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "tag": "from-phones",
+      "listen": "0.0.0.0",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "<UUID_PHONE>",
+            "flow": "xtls-rprx-vision",
+            "email": "phone-1"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "target": "127.0.0.1:8443",
+          "serverNames": [
+            "bridge.<YOUR_DOMAIN>"
+          ],
+          "privateKey": "<BRIDGE_REALITY_PRIVATE_KEY>",
+          "shortIds": [
+            "<SHORT_ID>"
+          ]
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ],
+        "routeOnly": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "to-exit",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "<EXIT_IP>",
+            "port": 443,
+            "users": [
+              {
+                "id": "<UUID_BRIDGE>",
+                "flow": "xtls-rprx-vision",
+                "encryption": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "exit.<YOUR_DOMAIN>",
+          "fingerprint": "firefox",
+          "publicKey": "<EXIT_REALITY_PUBLIC_KEY>",
+          "shortId": "<SHORT_ID>"
+        }
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom"
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:category-ru"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "ip": [
+          "geoip:ru"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "from-phones"
+        ],
+        "outboundTag": "to-exit"
+      }
+    ]
+  }
+}

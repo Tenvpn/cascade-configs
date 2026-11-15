@@ -1,0 +1,45 @@
+{
+  "domainStrategy": "IPIfNonMatch",
+  "rules": [
+    {
+      "type": "field",
+      "ip": [
+        "geoip:private"
+      ],
+      "outboundTag": "blocked"
+    },
+    {
+      "type": "field",
+      "domain": [
+        "geosite:category-ru"
+      ],
+      "outboundTag": "direct"
+    },
+    {
+      "type": "field",
+      "ip": [
+        "geoip:ru"
+      ],
+      "outboundTag": "direct"
+    },
+    {
+      "type": "field",
+      "inboundTag": [
+        "from-phones"
+      ],
+      "balancerTag": "exits"
+    }
+  ],
+  "balancers": [
+    {
+      "tag": "exits",
+      "selector": [
+        "to-exit-"
+      ],
+      "strategy": {
+        "type": "leastPing"
+      },
+      "fallbackTag": "to-exit-1"
+    }
+  ]
+}

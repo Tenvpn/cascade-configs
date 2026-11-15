@@ -1,0 +1,45 @@
+{
+  "tag": "from-cdn",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [
+      {
+        "id": "<UUID_PHONE>",
+        "email": "phone-cdn-1"
+      }
+    ],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+      "host": "cdn.<YOUR_DOMAIN>",
+      "path": "/<SECRET_PATH>",
+      "mode": "auto"
+    },
+    "security": "tls",
+    "tlsSettings": {
+      "alpn": [
+        "h2",
+        "http/1.1"
+      ],
+      "certificates": [
+        {
+          "certificateFile": "/etc/ssl/<YOUR_DOMAIN>/fullchain.pem",
+          "keyFile": "/etc/ssl/<YOUR_DOMAIN>/privkey.pem"
+        }
+      ]
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ],
+    "routeOnly": true
+  }
+}
