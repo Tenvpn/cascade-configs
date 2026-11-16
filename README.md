@@ -34,6 +34,9 @@
 | `<EXIT_REALITY_PRIVATE_KEY>` / `<EXIT_REALITY_PUBLIC_KEY>` | пара ключей Reality выхода (`xray x25519`) |
 | `<BRIDGE_REALITY_PRIVATE_KEY>` / `<BRIDGE_REALITY_PUBLIC_KEY>` | пара ключей Reality моста |
 | `<SHORT_ID>` | 8–16 hex-символов (`openssl rand -hex 8`) |
+| `<EXIT_1_IP>` / `<EXIT_2_IP>`, `<EXIT_1_REALITY_PUBLIC_KEY>` / `<EXIT_2_REALITY_PUBLIC_KEY>` | адреса и ключи двух выходов в схеме 6 |
+| `<SECRET_PATH>` | длинный случайный путь для XHTTP в схеме 5 (`openssl rand -hex 16`) |
+| `<..._AWG_...>`, `<JC>`…`<H4>` | ключи, порты и параметры обфускации AmneziaWG в схеме 4 (см. её README) |
 
 JSON-файлы — фрагменты под 3X-UI («Настройки Xray» → «Исходящие» / «Маршрутизация») или
 полные конфиги под голый Xray (`*-full.json`). Полный конфиг перед запуском проверяй:

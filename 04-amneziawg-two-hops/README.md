@@ -26,6 +26,9 @@
    в обе половины пары.
 4. Подними интерфейсы по порядку: на выходе `awg-quick up awg0`, на мосте `awg-quick up awg0`, затем `awg-quick up awg1`.
    Автозапуск: `systemctl enable awg-quick@awg0 awg-quick@awg1`.
+   В `exit-awg0.conf` замени `<EXIT_WAN>` на внешний интерфейс выхода (`ip route show default`, слово после `dev`).
+   MTU: `awg0` — 1420 на обоих концах, `awg1` и телефон — 1380, чтобы пакет телефона влез внутрь `awg0`.
+   Если у тебя AmneziaWG 2.0 и `S4` больше 20, снизь все четыре MTU на разницу (`S4` − 20).
 5. Проверка: на мосте `awg show` — у `awg0` должен быть свежий handshake. С телефона `ifconfig.me` показывает `<EXIT_IP>`.
 
 ## Важно
